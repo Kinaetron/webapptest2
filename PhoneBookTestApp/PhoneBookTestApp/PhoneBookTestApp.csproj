@@ -82,7 +82,6 @@
     <Compile Include="IPhoneBook.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="PhoneBook.cs" />
-    <Compile Include="Tests\PhoneBookTest.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

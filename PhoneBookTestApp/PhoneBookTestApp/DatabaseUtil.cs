@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.SQLite;
+using System.Collections.Generic;
 
 namespace PhoneBookTestApp
 {
@@ -7,15 +8,12 @@ namespace PhoneBookTestApp
     {
         public static void initializeDatabase()
         {
-            var dbConnection = new SQLiteConnection("Data Source= MyDatabase.sqlite;Version=3;");
-            dbConnection.Open();
-
-            try
+            using (var  dbConnection = GetConnection())
             {
                 SQLiteCommand command =
-                    new SQLiteCommand(
-                        "create table PHONEBOOK (NAME varchar(255), PHONENUMBER varchar(255), ADDRESS varchar(255))",
-                        dbConnection);
+                   new SQLiteCommand(
+                       "create table PHONEBOOK (NAME varchar(255), PHONENUMBER varchar(255), ADDRESS varchar(255))",
+                       dbConnection);
                 command.ExecuteNonQuery();
 
                 command =
@@ -30,15 +28,37 @@ namespace PhoneBookTestApp
                         dbConnection);
                 command.ExecuteNonQuery();
 
+
+                command.ExecuteNonQuery();
             }
-            catch (Exception)
+        }
+
+        public static void InsertPeople(IEnumerable<Person> people)
+        {
+            var dbConnection = GetConnection();
+
+            foreach (var person in people)
             {
-                throw;
+                try
+                {
+                    var command =
+                      new SQLiteCommand(
+                          "INSERT INTO PHONEBOOK (NAME, PHONENUMBER, ADDRESS) VALUES('@name', '@phoneNumber', '@address')",
+                          dbConnection);
+
+                    command.Parameters.AddWithValue("@firstname", person.Name);
+                    command.Parameters.AddWithValue("@phoneNumber", person.PhoneNumber);
+                    command.Parameters.AddWithValue("@address", person.Address);
+
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
             }
-            finally
-            {
-                dbConnection.Close();
-            }
+
+            dbConnection.Close();
         }
 
         public static SQLiteConnection GetConnection()
