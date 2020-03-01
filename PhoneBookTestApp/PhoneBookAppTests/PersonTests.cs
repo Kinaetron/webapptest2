@@ -12,7 +12,7 @@ namespace PhoneBookAppTests
         public void Person_WithNullName_ShouldThrowOutArguementNullException()
         {
             // Act 
-            var error = Record.Exception(() => new Person(null, "0000-0000-0000", "this is an address"));
+            var error = Record.Exception(() => new Person(null, "phoneNumber", "address"));
 
             // Assert
             error.Should().BeOfType<ArgumentNullException>();
@@ -23,7 +23,7 @@ namespace PhoneBookAppTests
         public void Person_WithPhoneNumber_ShouldThrowOutArguementNullException()
         {
             // Act 
-            var error = Record.Exception(() => new Person("first last", null, "this is an address"));
+            var error = Record.Exception(() => new Person("first last", null, "address"));
 
             // Assert
             error.Should().BeOfType<ArgumentNullException>();
@@ -34,7 +34,7 @@ namespace PhoneBookAppTests
         public void Person_WithNullAddress_ShouldThrowOutArguementNullException()
         {
             // Act 
-            var error = Record.Exception(() => new Person("first last", "0000-0000-0000", null));
+            var error = Record.Exception(() => new Person("first last", "phoneNumber", null));
 
             // Assert
             error.Should().BeOfType<ArgumentNullException>();
@@ -45,12 +45,12 @@ namespace PhoneBookAppTests
         public void Person_WithValidDetails_ShouldCreatePerson()
         {
             // Act 
-            var person = new Person("first last", "0000-0000-0000", "this is address");
+            var person = new Person("first last", "phoneNumber", "address");
 
             // Assert
             person.Name.Should().Be("first last");
-            person.PhoneNumber.Should().Be("0000-0000-0000");
-            person.Address.Should().Be("this is address");
+            person.PhoneNumber.Should().Be("phoneNumber");
+            person.Address.Should().Be("address");
         }
     }
 }

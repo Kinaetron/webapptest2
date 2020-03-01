@@ -17,7 +17,7 @@ namespace PhoneBookTestApp
 
 
             // TODO: print the phone book out to System.out
-            Console.WriteLine("Printing out all entries of phone book \n");
+            Console.WriteLine("All phonebook entries \n");
             foreach (var person in phonebook) {
                 Console.WriteLine(person);
             }
@@ -25,7 +25,7 @@ namespace PhoneBookTestApp
 
 
             // TODO: find Cynthia Smith and print out just her entry
-            Console.WriteLine("Printing out Cythia's entry \n");
+            Console.WriteLine("Cythia's phonebook entry \n");
             var cynthia = phonebook.FindPerson("Cynthia", "Smith");
             Console.WriteLine(cynthia);
 

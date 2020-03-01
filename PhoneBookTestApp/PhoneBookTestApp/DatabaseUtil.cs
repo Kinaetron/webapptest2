@@ -26,8 +26,6 @@ namespace PhoneBookTestApp
                     new SQLiteCommand(
                         "INSERT INTO PHONEBOOK (NAME, PHONENUMBER, ADDRESS) VALUES('Dave Williams','(231) 502-1236', '285 Huron St, Port Austin, MI')",
                         dbConnection);
-                command.ExecuteNonQuery();
-
 
                 command.ExecuteNonQuery();
             }
